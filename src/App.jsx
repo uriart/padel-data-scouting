@@ -13,9 +13,12 @@ function App() {
     const [view, setView] = useState('match');
     const [matchId, setMatchId] = useState(null);
     const [events, setEvents] = useState([]);
-    const [players, setPlayers] = useState({
-        team1: { p1: 'Jugador 1A', p2: 'Jugador 1B' },
-        team2: { p1: 'Jugador 2A', p2: 'Jugador 2B' },
+    const [players, setPlayers] = useState(() => {
+        const storedPlayers = localStorage.getItem('players');
+        return storedPlayers ? JSON.parse(storedPlayers) : {
+            team1: { p1: 'Player 1A', p2: 'Player 1B' },
+            team2: { p1: 'Player 2A', p2: 'Player 2B' },
+        };
     });
     const [score, setScore] = useState({
         sets: [{ team1: 0, team2: 0 }, { team1: 0, team2: 0 }, { team1: 0, team2: 0 }],
