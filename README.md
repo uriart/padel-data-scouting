@@ -1,42 +1,42 @@
 # Padel Data Scouting
 
-Progressive Web App (PWA) para hacer *scouting* de partidos de pádel en tiempo real, con estadísticas compartibles y almacenamiento offline.
+Progressive Web App (PWA) for real-time padel match scouting, with shareable statistics and offline storage.
 
-## 🚀 Tecnologías
+## 🚀 Technologies
 - [React](https://react.dev/) + [Vite](https://vitejs.dev/)
-- IndexedDB para almacenamiento offline
-- Diseño como PWA para funcionar sin conexión
-- Preparada para integración con funciones serverless y base de datos en la nube
+- IndexedDB for offline storage
+- PWA design for offline functionality
+- Ready for serverless functions and cloud database integration
 
-## ✨ Funcionalidades
-- Registro de eventos de un partido de pádel en tiempo real.
-- Generación automática de estadísticas del partido.
-- Visualización de gráficos y métricas de rendimiento.
-- Exportación de estadísticas en formato CSV.
-- Modo offline gracias a IndexedDB.
-- Compartir estadísticas fácilmente mediante enlace (requiere backend ligero).
+## ✨ Features
+- Real-time padel match event tracking
+- Automatic match statistics generation
+- Performance metrics and visualization
+- CSV statistics export
+- Offline mode with IndexedDB
+- Easy statistics sharing via link (requires lightweight backend)
 
-## 📦 Instalación y uso
+## 📦 Installation and Usage
 ```bash
-# Clonar repositorio
+# Clone repository
 git clone https://github.com/uriart/padel-scouting-app.git
 cd padel-data-scouting
 
-# Instalar dependencias
+# Install dependencies
 npm install
 
-# Ejecutar en modo desarrollo
+# Run in development mode
 npm run dev
 
-# Construir versión de producción
+# Build production version
 npm run build
 ```
 
-## 🛠 Próximos pasos
-- Integración con backend serverless (Cloudflare / Firebase / Supabase).
-- Mejoras en UI/UX.
-- Autenticación opcional para guardar partidos en la nube.
+## 🛠 Next Steps
+- Serverless backend integration (Cloudflare / Firebase / Supabase)
+- UI/UX improvements
+- Optional authentication for cloud match storage
 
-## 📄 Licencia
-Este proyecto se distribuye bajo la licencia MIT.  
-¡Contribuciones son bienvenidas!
+## 📄 License
+This project is distributed under the MIT license.  
+Contributions are welcome!
