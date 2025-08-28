@@ -1,4 +1,4 @@
-# Padel Scouting App
+# Padel Data Scouting
 
 Progressive Web App (PWA) para hacer *scouting* de partidos de pádel en tiempo real, con estadísticas compartibles y almacenamiento offline.
 
@@ -12,6 +12,7 @@ Progressive Web App (PWA) para hacer *scouting* de partidos de pádel en tiempo 
 - Registro de eventos de un partido de pádel en tiempo real.
 - Generación automática de estadísticas del partido.
 - Visualización de gráficos y métricas de rendimiento.
+- Exportación de estadísticas en formato CSV.
 - Modo offline gracias a IndexedDB.
 - Compartir estadísticas fácilmente mediante enlace (requiere backend ligero).
 
@@ -19,7 +20,7 @@ Progressive Web App (PWA) para hacer *scouting* de partidos de pádel en tiempo 
 ```bash
 # Clonar repositorio
 git clone https://github.com/uriart/padel-scouting-app.git
-cd padel-scouting-app
+cd padel-data-scouting
 
 # Instalar dependencias
 npm install
@@ -33,7 +34,6 @@ npm run build
 
 ## 🛠 Próximos pasos
 - Integración con backend serverless (Cloudflare / Firebase / Supabase).
-- Exportación de estadísticas en formato JSON/CSV.
 - Mejoras en UI/UX.
 - Autenticación opcional para guardar partidos en la nube.
 

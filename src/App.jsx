@@ -293,19 +293,28 @@ function App() {
 
     return (
         <div className="min-h-screen flex flex-col">
-            <header className="bg-white dark:bg-gray-800 shadow-md p-4 flex justify-between items-center">
+            <header className="bg-gradient-to-b from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 shadow-lg p-4 flex justify-between items-center border-b border-gray-200 dark:border-gray-700">
                 <h1 className="text-xl md:text-2xl font-bold text-gray-800 dark:text-white flex items-center">
-                    <span className="text-2xl mr-2">🎾</span> Padel Data Scouting
+                    <span className="text-2xl mr-2 transform hover:scale-110 transition-transform cursor-default">🎾</span>
+                    <span className="bg-gradient-to-r from-indigo-600 to-violet-600 dark:from-indigo-400 dark:to-violet-400 text-transparent bg-clip-text">
+                        Padel Data Scouting
+                    </span>
                 </h1>
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center space-x-3">
                     {view === 'match' && (
-                        <button onClick={undoLastPoint} className="p-2 rounded-full bg-yellow-500 text-white hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-400">
+                        <button 
+                            onClick={undoLastPoint} 
+                            className="p-2.5 rounded-lg bg-gradient-to-r from-amber-500 to-amber-600 text-white hover:from-amber-600 hover:to-amber-700 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 shadow-md transition-all duration-200"
+                        >
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm.707-10.293a1 1 0 00-1.414-1.414l-3 3a1 1 0 000 1.414l3 3a1 1 0 001.414-1.414L9.414 11H13a1 1 0 100-2H9.414l1.293-1.293z" clipRule="evenodd" />
                             </svg>
                         </button>
                     )}
-                    <button onClick={() => setView(v => v === 'match' ? 'stats' : 'match')} className="p-2 rounded-full bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                    <button 
+                        onClick={() => setView(v => v === 'match' ? 'stats' : 'match')} 
+                        className="p-2.5 rounded-lg bg-gradient-to-r from-indigo-500 to-indigo-600 text-white hover:from-indigo-600 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 shadow-md transition-all duration-200"
+                    >
                         {view === 'match' ? (
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                                 <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z" />
