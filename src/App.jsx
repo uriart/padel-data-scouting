@@ -101,11 +101,45 @@ function App() {
         setHistory(tempHistory);
     };
 
-    const handlePlayerNameChange = (team, player, name) => {
+    const handlePlayerNameChange = async (team, player, name) => {
+        const oldName = players[team][player];
+        
+        // Update players state
         setPlayers(prev => ({
             ...prev,
             [team]: { ...prev[team], [player]: name }
         }));
+
+        // Update all events with the new player name
+        const updatedEvents = events.map(event => {
+            if (event.player_id === oldName) {
+                const updatedEvent = {
+                    ...event,
+                    player_id: name
+                };
+                
+                // Update in IndexedDB
+                const transaction = db.transaction([STORE_NAME], 'readwrite');
+                const store = transaction.objectStore(STORE_NAME);
+                store.put(updatedEvent);
+                
+                return updatedEvent;
+            }
+            return event;
+        });
+
+        // Update events state
+        setEvents(updatedEvents);
+
+        // Update history with new player names
+        const updatedHistory = history.map(historyItem => ({
+            ...historyItem,
+            event: historyItem.event.player_id === oldName ? 
+                { ...historyItem.event, player_id: name } : 
+                historyItem.event
+        }));
+        
+        setHistory(updatedHistory);
     };
 
     const startNewMatch = async (isInitialLoad = false) => {
