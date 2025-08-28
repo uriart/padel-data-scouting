@@ -99,13 +99,13 @@ export function StatsView({ events, players }) {
                 stats
             };
 
-            //await fetch('https://api-dummy-url.com/matches', {
-            //    method: 'POST',
-            //    headers: {
-            //        'Content-Type': 'application/json',
-            //    },
-            //    body: JSON.stringify(matchData)
-            //});
+            await fetch('https://api-padel-data-scouting.loiro-8.workers.dev/save_match', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(matchData)
+            });
 
             // Then open native share dialog
             if (navigator.share) {
