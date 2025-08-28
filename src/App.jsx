@@ -47,14 +47,13 @@ function App() {
             db = dbInstance;
 
             // Check if we're loading a shared match
-            const path = window.location.pathname;
-            const matchUuidMatch = path.match(/^\/match\/([^\/]+)$/);
+            const urlParams = new URLSearchParams(window.location.search);
+            const matchUuid = urlParams.get('match');
 
-            if (matchUuidMatch) {
+            if (matchUuid) {
                 try {
                     // Loading shared match from API
-                    const uuid = matchUuidMatch[1];
-                    const matchData = await loadSharedMatch(uuid);
+                    const matchData = await loadSharedMatch(matchUuid);
                     setMatchId(matchData.matchId);
                     setEvents(matchData.events);
                     setPlayers(matchData.players);
