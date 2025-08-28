@@ -112,7 +112,7 @@ export function StatsView({ events, players }) {
                 await navigator.share({
                     title: 'Partido de Pádel',
                     text: 'Mira las estadísticas de este partido de pádel',
-                    url: window.location.href + "match/" + matchData.events[0].match_id
+                    url: `${window.location.origin}/match/${matchData.events[0].match_id}`
                 });
             } else {
                 alert('Tu navegador no soporta la función de compartir');

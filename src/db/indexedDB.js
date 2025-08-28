@@ -79,3 +79,43 @@ export const clearDB = () => {
         request.onerror = (e) => reject(e.target.error);
     });
 };
+
+// Function to load a shared match from the API and store it in IndexedDB
+export const loadSharedMatch = async (uuid) => {
+    try {
+        // Fetch match data from API
+        const response = await fetch(`https://api-padel-data-scouting.loiro-8.workers.dev/get_match/${uuid}`);
+        if (!response.ok) {
+            throw new Error('No se pudo cargar el partido compartido');
+        }
+        
+        const matchData = await response.json();
+        
+        // Clear existing data
+        await clearDB();
+        
+        // Store all events in IndexedDB
+        const transaction = db.transaction([STORE_NAME], 'readwrite');
+        const store = transaction.objectStore(STORE_NAME);
+        
+        // Add all events to IndexedDB
+        const promises = matchData.events.map(event => {
+            return new Promise((resolve, reject) => {
+                const request = store.add(event);
+                request.onsuccess = () => resolve();
+                request.onerror = () => reject();
+            });
+        });
+        
+        await Promise.all(promises);
+        
+        return {
+            events: matchData.events,
+            players: matchData.players,
+            matchId: matchData.events[0]?.match_id
+        };
+    } catch (error) {
+        console.error('Error loading shared match:', error);
+        throw error;
+    }
+};

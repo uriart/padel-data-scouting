@@ -3,7 +3,7 @@ import { MatchView } from './components/MatchView';
 import { StatsView } from './components/StatsView';
 import { Modal } from './components/Modal';
 import { EditStrokesModal } from './components/EditStrokesModal';
-import { initDB, addEventToDB, getEventsFromDB, clearDB } from './db/indexedDB';
+import { initDB, addEventToDB, getEventsFromDB, clearDB, loadSharedMatch } from './db/indexedDB';
 // Importamos el nombre del store
 let db;
 const STORE_NAME = 'match_events';
@@ -45,19 +45,42 @@ function App() {
         const initialize = async () => {
             const dbInstance = await initDB();
             db = dbInstance;
-            const storedMatchId = localStorage.getItem('currentMatchId');
-            if (storedMatchId) {
-                setMatchId(storedMatchId);
-                const storedEvents = await getEventsFromDB(storedMatchId);
-                setEvents(storedEvents);
-                recalculateStateFromEvents(storedEvents);
 
-                const storedPlayers = localStorage.getItem('players');
-                if (storedPlayers) {
-                    setPlayers(JSON.parse(storedPlayers));
+            // Check if we're loading a shared match
+            const path = window.location.pathname;
+            const matchUuidMatch = path.match(/^\/match\/([^\/]+)$/);
+
+            if (matchUuidMatch) {
+                try {
+                    // Loading shared match from API
+                    const uuid = matchUuidMatch[1];
+                    const matchData = await loadSharedMatch(uuid);
+                    setMatchId(matchData.matchId);
+                    setEvents(matchData.events);
+                    setPlayers(matchData.players);
+                    recalculateStateFromEvents(matchData.events);
+                    setView('stats'); // Automatically show stats for shared matches
+                } catch (error) {
+                    console.error('Error loading shared match:', error);
+                    alert('No se pudo cargar el partido compartido. Iniciando nuevo partido...');
+                    await startNewMatch(true);
                 }
             } else {
-                await startNewMatch(true);
+                // Normal app initialization
+                const storedMatchId = localStorage.getItem('currentMatchId');
+                if (storedMatchId) {
+                    setMatchId(storedMatchId);
+                    const storedEvents = await getEventsFromDB(storedMatchId);
+                    setEvents(storedEvents);
+                    recalculateStateFromEvents(storedEvents);
+
+                    const storedPlayers = localStorage.getItem('players');
+                    if (storedPlayers) {
+                        setPlayers(JSON.parse(storedPlayers));
+                    }
+                } else {
+                    await startNewMatch(true);
+                }
             }
         };
         initialize();
